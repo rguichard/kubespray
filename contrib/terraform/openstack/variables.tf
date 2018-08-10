@@ -5,13 +5,7 @@ variable "cluster_name" {
 variable "az_list" {
   description = "List of Availability Zones available in your OpenStack cluster"
   type = "list"
-  default = ["nova"]
-}
-
-variable "az_list" {
-  description = "List of Availability Zones available in your OpenStack cluster"
-  type = "list"
-  default = ["nova"]
+  default = ["compute-01","compute-02","compute-03"]
 }
 
 variable "number_of_bastions" {
@@ -61,7 +55,7 @@ variable "public_key_path" {
 
 variable "image" {
   description = "the image to use"
-  default     = "Test-centos7"
+  default     = "k8s-nodes"
 }
 
 variable "image_gfs" {
@@ -71,7 +65,7 @@ variable "image_gfs" {
 
 variable "ssh_user" {
   description = "used to fill out tags for ansible inventory"
-  default     = "centos"
+  default     = "root"
 }
 
 variable "ssh_user_gfs" {
@@ -118,7 +112,7 @@ variable "subnet_cidr" {
 variable "dns_nameservers" {
   description = "An array of DNS name server names used by hosts in this subnet."
   type        = "list"
-  default     = ["8.8.8.8","8.8.4.4"]
+  default     = ["10.197.214.5","8.8.8.8","8.8.4.4"]
 }
 
 variable "floatingip_pool" {

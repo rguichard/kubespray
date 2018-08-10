@@ -83,8 +83,7 @@ resource "openstack_compute_instance_v2" "bastion" {
   }
 
   security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
-    "${openstack_compute_secgroup_v2.bastion.name}",
-    "default",
+    "${openstack_compute_secgroup_v2.bastion.name}"
   ]
 
   metadata = {
@@ -113,8 +112,7 @@ resource "openstack_compute_instance_v2" "k8s_master" {
 
   security_groups = ["${openstack_compute_secgroup_v2.k8s_master.name}",
     "${openstack_compute_secgroup_v2.bastion.name}",
-    "${openstack_compute_secgroup_v2.k8s.name}",
-    "default",
+    "${openstack_compute_secgroup_v2.k8s.name}"
   ]
 
   metadata = {
@@ -193,8 +191,7 @@ resource "openstack_compute_instance_v2" "k8s_master_no_floating_ip" {
   }
 
   security_groups = ["${openstack_compute_secgroup_v2.k8s_master.name}",
-    "${openstack_compute_secgroup_v2.k8s.name}",
-    "default",
+    "${openstack_compute_secgroup_v2.k8s.name}"
   ]
 
   metadata = {
@@ -243,8 +240,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 
   security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
     "${openstack_compute_secgroup_v2.bastion.name}",
-    "${openstack_compute_secgroup_v2.worker.name}",
-    "default",
+    "${openstack_compute_secgroup_v2.worker.name}"
   ]
 
   metadata = {
@@ -272,8 +268,7 @@ resource "openstack_compute_instance_v2" "k8s_node_no_floating_ip" {
   }
 
   security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
-    "${openstack_compute_secgroup_v2.worker.name}",
-    "default",
+    "${openstack_compute_secgroup_v2.worker.name}"
   ]
 
   metadata = {
@@ -321,8 +316,7 @@ resource "openstack_compute_instance_v2" "glusterfs_node_no_floating_ip" {
     name = "${var.network_name}"
   }
 
-  security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
-    "default",
+  security_groups = ["${openstack_compute_secgroup_v2.k8s.name}"
   ]
 
   metadata = {

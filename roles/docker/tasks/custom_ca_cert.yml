@@ -1,0 +1,18 @@
+---
+- name: Create /etc/docker/certs.d
+  file:
+    name: "/etc/docker/certs.d"
+    state: directory
+  when:
+    - ansible_os_family == 'RedHat'
+
+
+- name: Create directory for each custom registry
+  copy:
+    src: "{{ item }}"
+    dest: /etc/docker/certs.d/
+  with_items:
+    - "{{ custom_registry }}"
+  when:
+    - ansible_os_family == 'RedHat'
+    - not is_atomic

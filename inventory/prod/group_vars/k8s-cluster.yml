@@ -281,7 +281,7 @@ dnsmasq_sidecar_image_repo: "registry.artemis.public/kubernetes/images/google_co
 dnsmasqautoscaler_image_repo: "registry.artemis.public/kubernetes/images/google_containers-cluster-proportional-autoscaler-amd64"
 kubednsautoscaler_image_repo: "registry.artemis.public/kubernetes/images/google_containers-cluster-proportional-autoscaler-amd64"
 elasticsearch_image_repo: "registry.artemis.public/kubernetes/images/elasticsearch"
-nginx_image_repo: registry.artemis.public/kubernetes/images/nginx
+nginx_image_repo: "registry.artemis.public/kubernetes/images/nginx"
 nginx_image_tag: latest
 fluentd_image_repo: "registry.artemis.public/kubernetes/images/fluentd-elasticsearch"
 kibana_image_repo: "registry.artemis.public/kubernetes/images/kibana-kibana"

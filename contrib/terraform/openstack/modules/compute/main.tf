@@ -255,6 +255,35 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 
 }
 
+resource "openstack_compute_instance_v2" "k8s_node_gpu" {
+  name       = "${var.cluster_name}-k8s-node-gpu-${count.index+1}"
+  count      = "${var.number_of_k8s_nodes_gpu}"
+  availability_zone = "${element(var.az_list, count.index)}"
+  image_name = "${var.image}"
+  flavor_id  = "${var.flavor_k8s_node_gpu}"
+  key_pair   = "${openstack_compute_keypair_v2.k8s.name}"
+
+  network {
+    name = "${var.network_name}"
+  }
+
+  security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
+    "${openstack_compute_secgroup_v2.bastion.name}",
+    "${openstack_compute_secgroup_v2.worker.name}"
+  ]
+
+  metadata = {
+    ssh_user         = "${var.ssh_user}"
+    kubespray_groups = "kube-node,k8s-cluster,kube-node-gpu"
+    depends_on       = "${var.network_id}"
+  }
+
+  provisioner "local-exec" {
+    command = "sed s/USER/${var.ssh_user}/ contrib/terraform/openstack/ansible_bastion_template.txt | sed s/BASTION_ADDRESS/${element( concat(var.bastion_fips, var.k8s_node_fips), 0)}/ > contrib/terraform/group_vars/no-floating.yml"
+  }
+
+}
+
 resource "openstack_compute_instance_v2" "k8s_node_no_floating_ip" {
   name       = "${var.cluster_name}-k8s-node-nf-${count.index+1}"
   count      = "${var.number_of_k8s_nodes_no_floating_ip}"

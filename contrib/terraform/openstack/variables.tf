@@ -36,6 +36,11 @@ variable "number_of_k8s_nodes" {
   default = 6
 }
 
+variable "number_of_k8s_nodes_gpu" {
+  default = 1
+}
+
+
 variable "number_of_k8s_nodes_no_floating_ip" {
   default = 0
 }
@@ -87,6 +92,12 @@ variable "flavor_k8s_node" {
   description = "Use 'nova flavor-list' command to see what your OpenStack instance uses for IDs"
   default     = "997927fa-0d04-4153-b8c2-8c6765888aca"
 }
+
+variable "flavor_k8s_node_gpu" {
+  description = "Use 'nova flavor-list' command to see what your OpenStack instance uses for IDs"
+  default     = "2e6d0836-858e-4566-83e2-60f3a019c9f2"
+}
+
 
 variable "flavor_etcd" {
   description = "Use 'nova flavor-list' command to see what your OpenStack instance uses for IDs"

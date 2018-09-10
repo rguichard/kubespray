@@ -4,6 +4,8 @@ variable "number_of_k8s_masters_no_etcd" {}
 
 variable "number_of_k8s_nodes" {}
 
+variable "number_of_k8s_nodes_gpu" {}
+
 variable "floatingip_pool" {}
 
 variable "number_of_bastions" {}

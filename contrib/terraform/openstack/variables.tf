@@ -61,7 +61,7 @@ variable "gfs_volume_size_in_gb" {
 
 variable "public_key_path" {
   description = "The path of the ssh pub key"
-  default     = "~/.ssh/id_rsa.pub"
+  default     = "~/.ssh/kubernetes-ssh.pub"
 }
 
 variable "image" {

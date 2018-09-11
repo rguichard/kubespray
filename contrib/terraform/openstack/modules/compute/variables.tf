@@ -4,6 +4,10 @@ variable "az_list" {
   type = "list"
 }
 
+variable "az_gpu_list" {
+  type = "list"
+}
+
 variable "number_of_k8s_masters" {}
 
 variable "number_of_k8s_masters_no_etcd" {}
@@ -57,6 +61,10 @@ variable "k8s_master_fips" {
 }
 
 variable "k8s_node_fips" {
+  type = "list"
+}
+
+variable "k8s_node_gpu_fips" {
   type = "list"
 }
 

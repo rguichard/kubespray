@@ -258,7 +258,7 @@ resource "openstack_compute_instance_v2" "k8s_node" {
 resource "openstack_compute_instance_v2" "k8s_node_gpu" {
   name       = "${var.cluster_name}-k8s-node-gpu-${count.index+1}"
   count      = "${var.number_of_k8s_nodes_gpu}"
-  availability_zone = "${element(var.az_list, count.index)}"
+  availability_zone = "${element(var.az_gpu_list, count.index)}"
   image_name = "${var.image}"
   flavor_id  = "${var.flavor_k8s_node_gpu}"
   key_pair   = "${openstack_compute_keypair_v2.k8s.name}"
@@ -324,6 +324,12 @@ resource "openstack_compute_floatingip_associate_v2" "k8s_node" {
   count       = "${var.number_of_k8s_nodes}"
   floating_ip = "${var.k8s_node_fips[count.index]}"
   instance_id = "${element(openstack_compute_instance_v2.k8s_node.*.id, count.index)}"
+}
+
+resource "openstack_compute_floatingip_associate_v2" "k8s_node_gpu" {
+  count       = "${var.number_of_k8s_nodes_gpu}"
+  floating_ip = "${var.k8s_node_gpu_fips[count.index]}"
+  instance_id = "${element(openstack_compute_instance_v2.k8s_node_gpu.*.id, count.index)}"
 }
 
 resource "openstack_blockstorage_volume_v2" "glusterfs_volume" {

@@ -27,6 +27,7 @@ module "compute" {
 
   cluster_name                                 = "${var.cluster_name}"
   az_list                                      = "${var.az_list}"
+  az_gpu_list                                  = "${var.az_gpu_list}"
   number_of_k8s_masters                        = "${var.number_of_k8s_masters}"
   number_of_k8s_masters_no_etcd                = "${var.number_of_k8s_masters_no_etcd}"
   number_of_etcd                               = "${var.number_of_etcd}"
@@ -52,6 +53,7 @@ module "compute" {
   flavor_bastion                               = "${var.flavor_bastion}"
   k8s_master_fips                              = "${module.ips.k8s_master_fips}"
   k8s_node_fips                                = "${module.ips.k8s_node_fips}"
+  k8s_node_gpu_fips                            = "${module.ips.k8s_node_gpu_fips}"
   bastion_fips                                 = "${module.ips.bastion_fips}"
   supplementary_master_groups                  = "${var.supplementary_master_groups}"
   supplementary_node_groups                    = "${var.supplementary_node_groups}"
@@ -77,6 +79,10 @@ output "k8s_master_fips" {
 
 output "k8s_node_fips" {
   value = "${module.ips.k8s_node_fips}"
+}
+
+output "k8s_node_gpu_fips" {
+  value = "${module.ips.k8s_node_gpu_fips}"
 }
 
 output "bastion_fips" {

@@ -8,6 +8,12 @@ variable "az_list" {
   default = ["compute-01","compute-02","compute-03"]
 }
 
+variable "az_gpu_list" {
+  description = "List of Availability Zones available in your OpenStack cluster where GPU are present"
+  type = "list"
+  default = ["compute-02"]
+}
+
 variable "number_of_bastions" {
   default = 0
 }

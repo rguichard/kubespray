@@ -83,9 +83,9 @@ cloud_provider: openstack
 #openstack_blockstorage_version: "v1/v2/auto (default)"
 ## When OpenStack is used, if LBaaSv2 is available you can enable it with the following 2 variables.
 openstack_lbaas_enabled: True
-openstack_lbaas_subnet_id: "d047eea8-9ca9-4d18-b3da-4bd066fb9fd6"
+openstack_lbaas_subnet_id: "eda35027-f8e5-4113-a88c-10dc1c082fba"
 ## To enable automatic floating ip provisioning, specify a subnet.
-#openstack_lbaas_floating_network_id: "58e36047-c34f-4e77-9b06-fa244cf2acb4"
+openstack_lbaas_floating_network_id: "2bccd0e7-eb59-4f91-bbb0-7a1aff04c4c2"
 ## Override default LBaaS behavior
 #openstack_lbaas_use_octavia: False
 #openstack_lbaas_method: "ROUND_ROBIN"

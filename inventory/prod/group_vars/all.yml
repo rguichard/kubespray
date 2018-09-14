@@ -25,10 +25,10 @@ bin_dir: /usr/local/bin
 #etcd_peer_client_auth: true
 
 ## External LB example config
-## apiserver_loadbalancer_domain_name: "elb.some.domain"
-#loadbalancer_apiserver:
-#  address: 1.2.3.4
-#  port: 1234
+apiserver_loadbalancer_domain_name: "kubernetes.artemis.public"
+loadbalancer_apiserver:
+  address: 10.197.214.127
+  port: 443
 
 ## Internal loadbalancers for apiservers
 #loadbalancer_apiserver_localhost: true

@@ -294,4 +294,7 @@ local_volume_provisioner_image_repo: "registry.artemis.public/kubernetes/images/
 cephfs_provisioner_image_repo: "registry.artemis.public/kubernetes/images/external_storage-cephfs-provisioner"
 ingress_nginx_controller_image_repo: "registry.artemis.public/kubernetes/images/kubernetes-ingress-controller-nginx-ingress-controller"
 ingress_nginx_default_backend_image_repo: "registry.artemis.public/kubernetes/images/google_containers-defaultbackend"
+ingress_nginx_controller_image_tag: "0.18.0"
 cert_manager_controller_image_repo: "registry.artemis.public/kubernetes/images/jetstack-cert-manager-controller"
+
+dashboard_image_repo: "registry.artemis.public/kubernetes/images/kubernetes-dashboard-amd64"

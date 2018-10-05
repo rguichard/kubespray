@@ -153,3 +153,4 @@
     - docker
 
 - import_tasks: custom_ca_cert.yml
+- import_tasks: custom_gpu_servers.yml

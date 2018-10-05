@@ -1,0 +1,17 @@
+---
+- name: Install docker-container-runtime
+  yum:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - nvidia-container-runtime-2.0.0-1.docker1.13.1
+    - nvidia-container-runtime-hook
+  when: inventory_hostname in groups['kube-node-gpu']
+  notify: restart docker
+
+- name: Change docker default runtime
+  copy:
+    src: daemon.json
+    dest: /etc/docker/daemon.json
+  when: inventory_hostname in groups['kube-node-gpu']
+  notify: restart docker

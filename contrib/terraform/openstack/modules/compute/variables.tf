@@ -34,6 +34,8 @@ variable "public_key_path" {}
 
 variable "image" {}
 
+variable "image_node" {}
+
 variable "image_gfs" {}
 
 variable "ssh_user" {}

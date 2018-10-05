@@ -41,6 +41,7 @@ module "compute" {
   gfs_volume_size_in_gb                        = "${var.gfs_volume_size_in_gb}"
   public_key_path                              = "${var.public_key_path}"
   image                                        = "${var.image}"
+  image                                   = "${var.image_node}"
   image_gfs                                    = "${var.image_gfs}"
   ssh_user                                     = "${var.ssh_user}"
   ssh_user_gfs                                 = "${var.ssh_user_gfs}"

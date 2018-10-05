@@ -43,9 +43,8 @@ variable "number_of_k8s_nodes" {
 }
 
 variable "number_of_k8s_nodes_gpu" {
-  default = 1
+  default = 2
 }
-
 
 variable "number_of_k8s_nodes_no_floating_ip" {
   default = 0
@@ -65,8 +64,13 @@ variable "public_key_path" {
 }
 
 variable "image" {
-  description = "the image to use"
+  description = "the image to use for all but workers"
   default     = "k8s-nodes"
+}
+
+variable "image_node" {
+  description = "the image to use workers"
+  default     = "k8s-node-kernel4"
 }
 
 variable "image_gfs" {

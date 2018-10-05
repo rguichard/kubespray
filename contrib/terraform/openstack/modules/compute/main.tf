@@ -53,11 +53,30 @@ resource "openstack_compute_secgroup_v2" "k8s" {
   }
 
   rule {
-    ip_protocol = "icmp"
+    ip_protocol = "any"
     from_port   = "-1"
     to_port     = "-1"
     self        = true
   }
+  rule {
+    ip_protocol = "any
+    from_port   = "-1"
+    to_port     = "-1"
+    cidr        = "10.233.0.0/16"
+  }
+  rule {
+    ip_protocol = "tcp"
+    from_port   = "-1"
+    to_port     = "-1"
+    cidr        = "169.254.169.254/32"
+  }
+  rule {
+    ip_protocol = "any"
+    from_port   = "-1"
+    to_port     = "-1"
+    cidr        = "10.197.214.0/24"
+  }
+
 }
 resource "openstack_compute_secgroup_v2" "worker" {
   name        = "${var.cluster_name}-k8s-worker"
@@ -69,6 +88,19 @@ resource "openstack_compute_secgroup_v2" "worker" {
     to_port     = "32767"
     cidr        = "0.0.0.0/0"
   }
+  rule {
+    ip_protocol = "tcp"
+    from_port   = "80"
+    to_port     = "80"
+    cidr        = "0.0.0.0/0"
+  }
+  rule {
+    ip_protocol = "tcp"
+    from_port   = "443"
+    to_port     = "443"
+    cidr        = "0.0.0.0/0"
+  }
+
 }
 
 resource "openstack_compute_instance_v2" "bastion" {
@@ -230,12 +262,16 @@ resource "openstack_compute_instance_v2" "k8s_node" {
   name       = "${var.cluster_name}-k8s-node-${count.index+1}"
   count      = "${var.number_of_k8s_nodes}"
   availability_zone = "${element(var.az_list, count.index)}"
-  image_name = "${var.image}"
+  image_name = "${var.image_node}"
   flavor_id  = "${var.flavor_k8s_node}"
   key_pair   = "${openstack_compute_keypair_v2.k8s.name}"
 
   network {
     name = "${var.network_name}"
+  }
+
+  network {
+    name = "public-ceph"
   }
 
   security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
@@ -259,7 +295,7 @@ resource "openstack_compute_instance_v2" "k8s_node_gpu" {
   name       = "${var.cluster_name}-k8s-node-gpu-${count.index+1}"
   count      = "${var.number_of_k8s_nodes_gpu}"
   availability_zone = "${element(var.az_gpu_list, count.index)}"
-  image_name = "${var.image}"
+  image_name = "${var.image_node}"
   flavor_id  = "${var.flavor_k8s_node_gpu}"
   key_pair   = "${openstack_compute_keypair_v2.k8s.name}"
 
@@ -267,6 +303,9 @@ resource "openstack_compute_instance_v2" "k8s_node_gpu" {
     name = "${var.network_name}"
   }
 
+  network {
+    name = "public-ceph"
+  }
   security_groups = ["${openstack_compute_secgroup_v2.k8s.name}",
     "${openstack_compute_secgroup_v2.bastion.name}",
     "${openstack_compute_secgroup_v2.worker.name}"

@@ -66,6 +66,7 @@ kube_users:
 # Choose network plugin (cilium, calico, contiv, weave or flannel)
 # Can also be set to 'cloud', which lets the cloud provider setup appropriate routing
 kube_network_plugin: calico
+calico_mtu: 1430
 
 # weave's network password for encryption
 # if null then no network encryption
@@ -206,13 +207,13 @@ cephfs_provisioner_enabled: false
 # cephfs_provisioner_deterministic_names: true
 
 # Nginx ingress controller deployment
-ingress_nginx_enabled: false
+ingress_nginx_enabled: true
 # ingress_nginx_host_network: false
-# ingress_nginx_nodeselector:
-#   node-role.kubernetes.io/master: "true"
-# ingress_nginx_namespace: "ingress-nginx"
-# ingress_nginx_insecure_port: 80
-# ingress_nginx_secure_port: 443
+ingress_nginx_nodeselector:
+  node-role.kubernetes.io/node: "true"
+ingress_nginx_namespace: "ingress-nginx"
+ingress_nginx_insecure_port: 80
+ingress_nginx_secure_port: 443
 # ingress_nginx_configmap:
 #   map-hash-bucket-size: "128"
 #   ssl-protocols: "SSLv2"
@@ -233,9 +234,9 @@ persistent_volumes_enabled: false
 # Download kubectl onto the host that runs Ansible in {{ bin_dir }}
 # kubectl_localhost: false
 
-# dnsmasq
-# dnsmasq_upstream_dns_servers:
-#  - /resolvethiszone.with/10.0.4.250
+## dnsmasq
+#dnsmasq_upstream_dns_servers:
+# - 10.197.214.5
 #  - 8.8.8.8
 
 #  Enable creation of QoS cgroup hierarchy, if true top level QoS and pod cgroups are created. (default true)

@@ -54,9 +54,8 @@ kubelet_load_modules: true
 #peer_with_router: false
 
 ## Upstream dns servers used by dnsmasq
-#upstream_dns_servers:
-#  - 8.8.8.8
-#  - 8.8.4.4
+upstream_dns_servers:
+  - 10.197.214.5
 
 ## There are some changes specific to the cloud providers
 ## for instance we need to encapsulate packets with some network plugins
@@ -80,20 +79,20 @@ cloud_provider: openstack
 #azure_route_table_name:
 
 ## When OpenStack is used, Cinder version can be explicitly specified if autodetection fails (Fixed in 1.9: https://github.com/kubernetes/kubernetes/issues/50461)
-#openstack_blockstorage_version: "v1/v2/auto (default)"
+openstack_blockstorage_version: "auto"
 ## When OpenStack is used, if LBaaSv2 is available you can enable it with the following 2 variables.
 openstack_lbaas_enabled: True
 openstack_lbaas_subnet_id: "eda35027-f8e5-4113-a88c-10dc1c082fba"
 ## To enable automatic floating ip provisioning, specify a subnet.
-openstack_lbaas_floating_network_id: "2bccd0e7-eb59-4f91-bbb0-7a1aff04c4c2"
+openstack_lbaas_floating_network_id: "58e36047-c34f-4e77-9b06-fa244cf2acb4"
 ## Override default LBaaS behavior
-#openstack_lbaas_use_octavia: False
-#openstack_lbaas_method: "ROUND_ROBIN"
-#openstack_lbaas_provider: "haproxy"
-#openstack_lbaas_create_monitor: "yes"
-#openstack_lbaas_monitor_delay: "1m"
-#openstack_lbaas_monitor_timeout: "30s"
-#openstack_lbaas_monitor_max_retries: "3"
+openstack_lbaas_use_octavia: False
+openstack_lbaas_method: "ROUND_ROBIN"
+openstack_lbaas_provider: "haproxy"
+openstack_lbaas_create_monitor: "true"
+openstack_lbaas_monitor_delay: "1m"
+openstack_lbaas_monitor_timeout: "30s"
+openstack_lbaas_monitor_max_retries: "3"
 
 ## Uncomment to enable experimental kubeadm deployment mode
 #kubeadm_enabled: false
